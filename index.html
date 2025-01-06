@@ -68,58 +68,57 @@
 
     <script>
         const quizQuestions = [
-            {
-                "question": "1. What does transposing a dataset typically achieve?",
-                "options": [
-                    "Merges two DataFrames",
-                    "Switches rows and columns",
-                    "Deletes missing data",
-                    "Sorts rows in ascending order"
-                ],
-                "answer": "Switches rows and columns"
-            },
-            {
-                "question": "2. Which method can be used to combine DataFrames by keys?",
-                "options": [
-                    "pd.transpose()",
-                    "pd.merge()",
-                    "df.sort_values()",
-                    "df.dropna()"
-                ],
-                "answer": "pd.merge()"
-            },
-            {
-                "question": "3. What is the purpose of grouping data by a column?",
-                "options": [
-                    "Drop rows with NaN values",
-                    "Create bar charts",
-                    "Perform aggregations (like sum or mean) by category",
-                    "Filter specific rows"
-                ],
-                "answer": "Perform aggregations (like sum or mean) by category"
-            },
-            {
-                "question": "4. Which of the following best describes a vectorized operation?",
-                "options": [
-                    "An operation that loops over rows explicitly",
-                    "A single operation applied element-wise without explicit Python loops",
-                    "A function that sorts rows in the DataFrame",
-                    "An operation that always produces a pivot table"
-                ],
-                "answer": "A single operation applied element-wise without explicit Python loops"
-            },
-            {
-                "question": "5. In a loop processing multiple files, what is a common first step?",
-                "options": [
-                    "Writing a pivot table",
-                    "Checking if the directory/files exist",
-                    "Merging all columns into one file",
-                    "Dropping duplicates"
-                ],
-                "answer": "Checking if the directory/files exist"
-            }
-        ];
-
+    {
+        "question": "1. What is the purpose of a user-defined function in Python?",
+        "options": [
+            "To create reusable blocks of code",
+            "To process missing values",
+            "To filter rows and columns in a DataFrame",
+            "To visualize data"
+        ],
+        "answer": "To create reusable blocks of code"
+    },
+    {
+        "question": "2. Which of the following is a valid way to call a function in Python?",
+        "options": [
+            "function name",
+            "function name()",
+            "call function name()",
+            "None of the above"
+        ],
+        "answer": "function name()"
+    },
+    {
+        "question": "3. What method is used to filter rows in a DataFrame based on a condition?",
+        "options": [
+            "df.isnull()",
+            "df.filter()",
+            "df.loc[condition]",
+            "df.fillna()"
+        ],
+        "answer": "df.loc[condition]"
+    },
+    {
+        "question": "4. How can you check for missing values in a DataFrame?",
+        "options": [
+            "df.isnull()",
+            "df.describe()",
+            "df.dropna()",
+            "df.mean()"
+        ],
+        "answer": "df.isnull()"
+    },
+    {
+        "question": "5. What is the first step when handling missing values in a dataset?",
+        "options": [
+            "Delete rows with missing values",
+            "Identify the missing data",
+            "Replace missing values with the mean",
+            "Ignore the missing values"
+        ],
+        "answer": "Identify the missing data"
+    }
+];
         let currentQuestionIndex = 0;
         let score = 0;
 
