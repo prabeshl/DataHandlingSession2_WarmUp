@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session 3 Warm-Up Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .quiz-container {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .options {
+            list-style-type: none;
+            padding: 0;
+        }
+        .options li {
+            margin-bottom: 10px;
+        }
+        .options input {
+            margin-right: 10px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .score {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div id="quiz">
+            <!-- Quiz content will be injected here -->
+        </div>
+        <button id="next-btn" class="btn" disabled>Next</button>
+        <div id="result" class="score"></div>
+    </div>
+
+    <script>
+        const quizQuestions = [
+            {
+                "question": "1. What does transposing a dataset typically achieve?",
+                "options": [
+                    "Merges two DataFrames",
+                    "Switches rows and columns",
+                    "Deletes missing data",
+                    "Sorts rows in ascending order"
+                ],
+                "answer": "Switches rows and columns"
+            },
+            {
+                "question": "2. Which method can be used to combine DataFrames by keys?",
+                "options": [
+                    "pd.transpose()",
+                    "pd.merge()",
+                    "df.sort_values()",
+                    "df.dropna()"
+                ],
+                "answer": "pd.merge()"
+            },
+            {
+                "question": "3. What is the purpose of grouping data by a column?",
+                "options": [
+                    "Drop rows with NaN values",
+                    "Create bar charts",
+                    "Perform aggregations (like sum or mean) by category",
+                    "Filter specific rows"
+                ],
+                "answer": "Perform aggregations (like sum or mean) by category"
+            },
+            {
+                "question": "4. Which of the following best describes a vectorized operation?",
+                "options": [
+                    "An operation that loops over rows explicitly",
+                    "A single operation applied element-wise without explicit Python loops",
+                    "A function that sorts rows in the DataFrame",
+                    "An operation that always produces a pivot table"
+                ],
+                "answer": "A single operation applied element-wise without explicit Python loops"
+            },
+            {
+                "question": "5. In a loop processing multiple files, what is a common first step?",
+                "options": [
+                    "Writing a pivot table",
+                    "Checking if the directory/files exist",
+                    "Merging all columns into one file",
+                    "Dropping duplicates"
+                ],
+                "answer": "Checking if the directory/files exist"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        const quizContainer = document.getElementById('quiz');
+        const nextButton = document.getElementById('next-btn');
+        const resultContainer = document.getElementById('result');
+
+        function displayQuestion() {
+            const question = quizQuestions[currentQuestionIndex];
+
+            quizContainer.innerHTML = `
+                <div class="question">${question.question}</div>
+                <ul class="options">
+                    ${question.options
+                        .map(
+                            (option) => `
+                                <li>
+                                    <label>
+                                        <input type="radio" name="option" value="${option}" />
+                                        ${option}
+                                    </label>
+                                </li>
+                            `
+                        )
+                        .join('')}
+                </ul>
+            `;
+
+            nextButton.disabled = true;
+            const options = document.querySelectorAll('input[name="option"]');
+            options.forEach(option => {
+                option.addEventListener('change', () => {
+                    nextButton.disabled = false;
+                });
+            });
+        }
+
+        function showResult() {
+            quizContainer.style.display = 'none';
+            nextButton.style.display = 'none';
+            resultContainer.innerHTML = `🎯 Warm-Up Quiz Completed! Your score is: ${score}/${quizQuestions.length}`;
+            if (score === quizQuestions.length) {
+                resultContainer.innerHTML += '<br>🏆 Perfect! You\'re ready for Session 3!';
+            } else if (score >= quizQuestions.length / 2) {
+                resultContainer.innerHTML += '<br>🎖️ Good job! A quick review will help you excel further.';
+            } else {
+                resultContainer.innerHTML += '<br>💪 Keep practicing! Go over the Session 2 materials again if needed.';
+            }
+        }
+
+        nextButton.addEventListener('click', () => {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            const question = quizQuestions[currentQuestionIndex];
+
+            if (selectedOption && selectedOption.value === question.answer) {
+                score++;
+            }
+
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizQuestions.length) {
+                displayQuestion();
+            } else {
+                showResult();
+            }
+        });
+
+        // Initialize the quiz
+        displayQuestion();
+    </script>
+</body>
+</html>
